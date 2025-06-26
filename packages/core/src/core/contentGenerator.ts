@@ -104,11 +104,18 @@ export async function createContentGenerator(
   config: ContentGeneratorConfig,
 ): Promise<ContentGenerator> {
   const version = process.env.CLI_VERSION || process.version;
+
+
+  const baseUrl = process.env.BASE_URL;
+  const portkeyApiKey = process.env.PORTKEY_API_KEY;
   const httpOptions = {
     headers: {
       'User-Agent': `GeminiCLI/${version} (${process.platform}; ${process.arch})`,
+      ...(portkeyApiKey && { 'x-portkey-api-key': portkeyApiKey }),
     },
+    ...(baseUrl && { baseURL: baseUrl }),
   };
+
   if (config.authType === AuthType.LOGIN_WITH_GOOGLE_PERSONAL) {
     return createCodeAssistContentGenerator(httpOptions, config.authType);
   }
