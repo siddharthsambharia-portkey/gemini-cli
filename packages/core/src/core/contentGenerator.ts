@@ -53,7 +53,7 @@ export type ContentGeneratorConfig = {
     vertexAccessToken?: string;
     vertexProjectId?: string;
     vertexRegion?: string;
-    baseUrl?: string;
+    baseUrl: string;
   };
 };
 
@@ -126,7 +126,7 @@ export async function createContentGeneratorConfig(
       vertexAccessToken: portkeyVertexAccessToken,
       vertexProjectId: portkeyVertexProjectId,
       vertexRegion: portkeyVertexRegion,
-      baseUrl: portkeyBaseUrl,
+      baseUrl: portkeyBaseUrl || 'https://api.portkey.ai/v1',
     };
 
     return contentGeneratorConfig;

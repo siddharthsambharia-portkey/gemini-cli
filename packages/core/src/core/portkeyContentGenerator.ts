@@ -29,9 +29,6 @@ import {
   
       this.apiKey = config.portkey.apiKey;
       this.model = config.model;
-      this.vertexAccessToken = config.portkey.vertexAccessToken;
-      this.vertexProjectId = config.portkey.vertexProjectId;
-      this.vertexRegion = config.portkey.vertexRegion;
       this.baseUrl = config.portkey.baseUrl || 'https://api.portkey.ai/v1';
     }
   
@@ -40,24 +37,8 @@ import {
       const headers: Record<string, string> = {
         'Content-Type': 'application/json',
         'x-portkey-api-key': this.apiKey,
-        'x-portkey-provider': 'vertex-ai',
       };
   
-  
-      // Your gateway uses x-portkey-virtual-key instead of Authorization
-      if (this.vertexAccessToken) {
-        headers['x-portkey-virtual-key'] = this.vertexAccessToken;
-      }
-  
-  
-      if (this.vertexProjectId) {
-        headers['x-portkey-vertex-project-id'] = this.vertexProjectId;
-      }
-  
-  
-      if (this.vertexRegion) {
-        headers['x-portkey-vertex-region'] = this.vertexRegion;
-      }
   
   
       return headers;
